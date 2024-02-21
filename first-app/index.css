@@ -1,0 +1,17 @@
+.heading {
+    color: red;
+}
+
+.heading1 {
+    color: blue;
+}
+
+#header {
+    position: sticky;
+    background-color: #67cb73;
+    top: 0;
+    margin-bottom: 40px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
