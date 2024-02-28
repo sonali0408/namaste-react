@@ -21,7 +21,7 @@ const Body = () => {
                 <button className='fiter-btn' onClick={() => {
                     const filteredList = listOfRestaurants.filter((res) => res.info.avgRating >= 4.5)
                     setListOfRestaurants(filteredList)
-                    console.log(filteredList)
+                    //console.log(filteredList)
                 }}>
                     <FontAwesomeIcon icon={faFilter} />
                     Filter
