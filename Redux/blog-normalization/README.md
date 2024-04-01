@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+Normalization
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Recommended in docs for storing items
+- No data duplication
+- Creates an ID lookup by item id
 
-## Available Scripts
+createEntityAdapter API
+React toolkit provides createEntityAdapter api which makes slicess less compplicated & easy to manage
 
-In the project directory, you can run:
+- Abstracts more logic from components & move them to slice
+- It has built in CRUD methods
+- Automativ selector generation
 
-### `npm start`
+createEntityAdapter accepts a single options object parameter, with two optional fields inside.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. selectId
+2. sortComparator
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+e.g const postsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.date.localeCompare(a.date),
+});
 
-### `npm test`
+CRUD Functions
+The primary content of an entity adapter is a set of generated reducer functions for adding, updating, and removing entity instances from an entity state object:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. addOne: accepts a single entity, and adds it if it's not already present.
+2. addMany: accepts an array of entities or an object in the shape of Record<EntityId, T>, and adds them if not already present.
+3. setOne: accepts a single entity and adds or replaces it
+4. setMany: accepts an array of entities or an object in the shape of Record<EntityId, T>, and adds or replaces them.
+5. setAll: accepts an array of entities or an object in the shape of Record<EntityId, T>, and replaces all existing entities with the values in the array.
+6. removeOne: accepts a single entity ID value, and removes the entity with that ID if it exists.
+7. removeMany: accepts an array of entity ID values, and removes each entity with those IDs if they exist.
+8. removeAll: removes all entities from the entity state object.
+9. updateOne: accepts an "update object" containing an entity ID and an object containing one or more new field values to update inside a changes field, and performs a shallow update on the corresponding entity.
+10. updateMany: accepts an array of update objects, and performs shallow updates on all corresponding entities.
+11. upsertOne: accepts a single entity. If an entity with that ID exists, it will perform a shallow update and the specified fields will be merged into the existing entity, with any matching fields overwriting the existing values. If the entity does not exist, it will be added.
+12. upsertMany: accepts an array of entities or an object in the shape of Record<EntityId, T> that will be shallowly upserted.
