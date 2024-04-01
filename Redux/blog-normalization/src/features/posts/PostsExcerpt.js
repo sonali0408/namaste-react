@@ -2,11 +2,13 @@ import PostAuthor from "./PostAuthor";
 import TimeAgo from "./TimeAgo";
 import ReactionButtons from "./ReactionButtons";
 import { Link } from "react-router-dom";
-import React from "react";
-import { memo } from "react";
 
-//const PostsExcerpt = ({ post }) => {
-const PostsExcerpt = ({ post }) => {
+import { useSelector } from "react-redux";
+import { selectPostById } from "./postsSlice";
+
+const PostsExcerpt = ({ postId }) => {
+  const post = useSelector((state) => selectPostById(state, postId));
+
   return (
     <article>
       <h2>{post.title}</h2>
@@ -21,9 +23,4 @@ const PostsExcerpt = ({ post }) => {
   );
 };
 
-/** Allows this component to not re-render if the prop it recieved i.e
- * post does not change
- * Stops rerendering all posts if reactions are changes in any particular post
- */
-PostsExcerpt = React.memo(PostsExcerpt);
 export default PostsExcerpt;
